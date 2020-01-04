@@ -20,6 +20,8 @@ import EditClass from './pages/admin/editClass';
 import AddProf from './pages/admin/addProf';
 import ProfList from './pages/admin/profList';
 import EditProf from './pages/admin/editProf';
+import ElementList from './pages/admin/ElementList';
+import AddElement from './pages/admin/addElement';
 
 class App extends React.Component {
   constructor(props){
@@ -33,11 +35,7 @@ class App extends React.Component {
 
 
   render() {
-    let gtx = localStorage.getItem('_Gtx');
-console.log("het:"+gtx)
-if(gtx){
-  console.log('ah')
-}
+
     return(
 
 
@@ -46,11 +44,13 @@ if(gtx){
   <PrivateRoute exact path="/" component={Home} />
   <PrivateRoute exact path="/users" component={UserList} />
   <PrivateRoute exact path="/profs" component={ProfList} />
+  <PrivateRoute exact path="/elements" component={ElementList} />
   <PrivateRoute exact path="/user/:id" component={EditUser} />
   <PrivateRoute exact path="/prof/:id" component={EditProf} />
   <PrivateRoute exact path="/class/:id" component={EditClass} />
   <PrivateRoute exact path="/users/add" component={AddUser} />
   <PrivateRoute exact path="/profs/add" component={AddProf} />
+  <PrivateRoute exact path="/elements/add" component={AddElement} />
 
   <PrivateRoutee exact path="/login" component={LoginAdmin} />
 
