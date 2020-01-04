@@ -29,13 +29,20 @@ class Navbar extends React.Component {
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                          <Link  class="nav-link" to="/">Home <span class="sr-only">(current)</span></Link>
+                          <Link  class="nav-link" to="/">ClassList <span class="sr-only">(current)</span></Link>
                         </li>
                         <li class="nav-item">
                           <Link  class="nav-link" to="/users">UserList</Link>
                         </li>
                         <li class="nav-item">
                           <Link  class="nav-link" to="/users/add">AddUser</Link>
+                        </li>
+                       
+                        <li class="nav-item">
+                          <Link  class="nav-link" to="/profs">ProfList</Link>
+                        </li>
+                        <li class="nav-item">
+                          <Link  class="nav-link" to="/profs/add">AddProf</Link>
                         </li>
                         <li class="nav-item">
                           <a onClick={this.clicked} class="nav-link" href="#">log out</a>

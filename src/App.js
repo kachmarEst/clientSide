@@ -10,12 +10,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginAdmin from './Logins/loginAdmin';
 import axios from 'axios';
 import Navbar from './components/navbar';
-import Home from './pages/home';
+import Home from './pages/admin/home';
 import PrivateRoute from './middleware/privateRoute';
 import PrivateRoutee from './middleware/privateRoutee';
-import UserList from './pages/userList';
-import AddUser from './pages/addUser';
-import EditUser from './pages/editUser';
+import UserList from './pages/admin/userList';
+import AddUser from './pages/admin/addUser';
+import EditUser from './pages/admin/editUser';
+import EditClass from './pages/admin/editClass';
+import AddProf from './pages/admin/addProf';
+import ProfList from './pages/admin/profList';
+import EditProf from './pages/admin/editProf';
 
 class App extends React.Component {
   constructor(props){
@@ -41,9 +45,12 @@ if(gtx){
 <Switch>
   <PrivateRoute exact path="/" component={Home} />
   <PrivateRoute exact path="/users" component={UserList} />
+  <PrivateRoute exact path="/profs" component={ProfList} />
   <PrivateRoute exact path="/user/:id" component={EditUser} />
-
+  <PrivateRoute exact path="/prof/:id" component={EditProf} />
+  <PrivateRoute exact path="/class/:id" component={EditClass} />
   <PrivateRoute exact path="/users/add" component={AddUser} />
+  <PrivateRoute exact path="/profs/add" component={AddProf} />
 
   <PrivateRoutee exact path="/login" component={LoginAdmin} />
 

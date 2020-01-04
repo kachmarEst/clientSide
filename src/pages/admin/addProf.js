@@ -1,15 +1,18 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import Navbar from '../components/navbar';
+import Navbar from '../../components/navbar';
 
-class AddUser extends React.Component {
+class AddProf extends React.Component {
     constructor(props){
         super(props);
         this.state ={
             username:'',
             email:'',
             password:'',
+            lastName:'',
+            firstName:'',
+            cin:'',
             err:''
         }
     }
@@ -42,7 +45,7 @@ class AddUser extends React.Component {
     
  }
 
-    AddUser = (e) =>{
+    AddProf = (e) =>{
         e.preventDefault();
         const headers = {
             'Content-Type':'application/json',
@@ -52,14 +55,18 @@ class AddUser extends React.Component {
         const cred = {
             username:this.state.username,
             email:this.state.email,
+            firstName:this.state.firstName,
+            lastName:this.state.lastName,
+            cin:this.state.cin,
+
             password:this.state.password
         }
-        axios.post('//localhost:5000/users/add',cred,{
+        axios.post('//localhost:5000/profs/add',cred,{
             headers:headers
         })
         .then(
             res =>{
-                this.props.history.push('/users');
+                this.props.history.push('/profs');
 
             }
         )
@@ -87,7 +94,21 @@ class AddUser extends React.Component {
             username: e.target.value
         })
     }
-
+    onChangeFN = (e) =>{
+        this.setState({
+            firstName: e.target.value
+        })
+    }
+    onChangeLN = (e) =>{
+        this.setState({
+            lastName: e.target.value
+        })
+    }
+    onChangeCIN = (e) =>{
+        this.setState({
+            cin: e.target.value
+        })
+    }
 
   render() {
     return (
@@ -95,14 +116,27 @@ class AddUser extends React.Component {
 
         <div className="container">
             <Navbar />
-        <h1> WELCOME TO THE AddUser PAGE !  </h1>
+        <h1> WELCOME TO THE AddProf PAGE !  </h1>
 
 
         
-        <form style={{margin: '8%'}} onSubmit={this.AddUser} >
+        <form style={{margin: '8%'}} onSubmit={this.AddProf} >
                     
                     <h1>Add User</h1>
                     <span style={{color: 'red'}}>{this.state.err != '' ?JSON.stringify(this.state.err) : ''}</span> 
+
+                    <div className="from-group">
+                <label>FirstName</label>
+                    <input type="text" className="form-control" onChange={this.onChangeFN} name="firstName" id="firstName" placeholder="firstName" />
+                    </div>
+                    <div className="from-group">
+                <label>LastName</label>
+                    <input type="text" className="form-control" onChange={this.onChangeLN} name="lastName" id="lastName" placeholder="lastName" />
+                    </div>
+                    <div className="from-group">
+                <label>CIN</label>
+                    <input type="text" className="form-control" onChange={this.onChangeCIN} name="cin" id="cin" placeholder="cin" />
+                    </div>
                     <div className="from-group">
                 <label>Email</label>
                     <input type="email" className="form-control" onChange={this.onChangeEmail} name="email" id="email" placeholder="email" />
@@ -123,4 +157,4 @@ class AddUser extends React.Component {
   }
 }
 
-export default AddUser;
+export default AddProf;

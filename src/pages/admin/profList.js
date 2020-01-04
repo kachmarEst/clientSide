@@ -1,33 +1,33 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import Navbar from '../components/navbar';
+import Navbar from '../../components/navbar';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
   } from "react-router-dom";
-class UserList extends React.Component {
+class ProfList extends React.Component {
 
     constructor(props){
      super(props);
      this.state= {
-         users:[],
+         profs:[],
          err:''
      }
     }
 
-    loadUsers = () =>{
+    loadProfs = () =>{
         const headers = {
             'Content-Type':'application/json',
             'Accept':'application/json',
             'x-auth-token':localStorage.getItem('_Gtx')
              } 
 
-            axios.get('//localhost:5000/users',{headers:headers})
+            axios.get('//localhost:5000/profs',{headers:headers})
             .then(res =>{
-                this.setState({users:res.data});
+                this.setState({profs:res.data});
                 console.log(res.data)
             })
             .catch(error =>{
@@ -60,7 +60,7 @@ class UserList extends React.Component {
       );
 
     }
-    this.loadUsers();
+    this.loadProfs();
 
 
     
@@ -72,10 +72,10 @@ class UserList extends React.Component {
         'Accept':'application/json',
         'x-auth-token':localStorage.getItem('_Gtx')
          } 
-         axios.delete('//localhost:5000/users/'+id,{headers:headers})
+         axios.delete('//localhost:5000/profs/'+id,{headers:headers})
          .then(res =>{
              console.log(res.data.msg)
-             this.loadUsers();
+             this.loadProfs();
         })
          .catch(error =>{
             this.setState({err:error.response.data.msg});
@@ -83,13 +83,16 @@ class UserList extends React.Component {
 
  }
 
- mappingUsers = () =>{
-     return this.state.users.map((item) =>
+ mappingProfs = () =>{
+     return this.state.profs.map((item) =>
     <tr >
       <td>{item.username}</td>
      <td>{item.email}</td>
+     <td>{item.firstName}</td>
+     <td>{item.lastName}</td>
+     <td>{item.cin}</td>
      <td>{item.createdAt}</td>
-     <td><Link className="btn btn-warning" to={"/user/"+item._id} >Edit</Link></td>
+     <td><Link className="btn btn-warning" to={"/prof/"+item._id} >Edit</Link></td>
      <td><button onClick={() => this.clicked(item._id)} className="btn btn-danger">Delete</button></td>
    </tr>
        )
@@ -100,7 +103,7 @@ class UserList extends React.Component {
 
         <div className="container">
             <Navbar />
-        <h1> WELCOME TO THE UserList PAGE !  </h1>
+        <h1> WELCOME TO THE ProfList PAGE !  </h1>
         <span style={{color: 'red'}}>{this.state.err != '' ?this.state.err : ''}</span> 
 
         <table class="table">
@@ -109,6 +112,9 @@ class UserList extends React.Component {
 
       <th scope="col">username</th>
       <th scope="col">email</th>
+      <th scope="col">firstName</th>
+      <th scope="col">lastName</th>
+      <th scope="col">cin</th>
       <th scope="col">created_at</th>
       <th colSpan="2">actions</th>
 
@@ -117,7 +123,7 @@ class UserList extends React.Component {
   </thead>
   <tbody>
    
-  {this.mappingUsers()}
+  {this.mappingProfs()}
   </tbody>
 </table>
         </div>
@@ -125,4 +131,4 @@ class UserList extends React.Component {
   }
 }
 
-export default UserList;
+export default ProfList;

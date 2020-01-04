@@ -51,7 +51,7 @@ class LoginAdmin extends React.Component {
  
         return (
           
-                <form style={{margin: '20%'}} onSubmit={this.SignIn} >
+                <form style={{margin: '8%'}} onSubmit={this.SignIn} >
                     
                     <h1>ADMIN LOGIN</h1>
                     <span style={{color: 'red'}}>{this.state.err != '' ?this.state.err : ''}</span> 
