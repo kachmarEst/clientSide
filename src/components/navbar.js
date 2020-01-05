@@ -45,10 +45,17 @@ class Navbar extends React.Component {
                           <Link  className="nav-link" to="/profs/add">AddProf</Link>
                         </li>
                         <li className="nav-item">
-                          <Link  className="nav-link" to="/Elements">ElementList</Link>
+                          <Link  className="nav-link" to="/elements">ElementList</Link>
                         </li>
                         <li className="nav-item">
-                          <Link  className="nav-link" to="/Elements/add">AddElement</Link>
+                          <Link  className="nav-link" to="/elements/add">AddElement</Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link  className="nav-link" to="/students">StudentList</Link>
+                        </li>
+                        
+                        <li className="nav-item">
+                          <Link  className="nav-link" to="/students/add">AddStudent</Link>
                         </li>
                         <li className="nav-item">
                           <a onClick={this.clicked} className="nav-link" href="#">log out</a>
