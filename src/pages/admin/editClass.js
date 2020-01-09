@@ -80,7 +80,7 @@ class EditClass extends React.Component {
         .then(
             res =>{
                 console.log(res.data.msg)
-                this.props.history.push('/');
+                this.props.history.push('/dashboard');
 
             }
         )

@@ -36,7 +36,7 @@ class LoginAdmin extends React.Component {
         headers:headers})
       .then( res => {
         localStorage.setItem('_Gtx',res.data.token);
-        this.props.history.push('/');
+        this.props.history.push('/dashboard');
       })
       .catch( err => {
         this.setState({

@@ -5,23 +5,21 @@ import { Route, Redirect } from 'react-router-dom';
 
 
 
-const PrivateRoutee = ({component: Component, ...rest}) => {
-    let gtx = localStorage.getItem('_Gtx');
+const ProfRoute = ({component: Component, ...rest}) => {
     let lsnpx = localStorage.getItem('_LsnPx');
-
+    
     return (
   // Show the component only when the user is logged in
         // Otherwise, redirect the user to /signin page
         <Route {...rest} render={props => (
-           gtx ?
-           <Redirect to="/dashboard" /> :
-           lsnpx ? <Redirect to="/" /> 
-            : <Component {...props} />
+            lsnpx ?
+                <Component {...props} />
+            : <Redirect to="/signin" />
         )} />
     );
 };
 
-export default PrivateRoutee;
+export default ProfRoute;
 
 
 

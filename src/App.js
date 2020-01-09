@@ -12,6 +12,8 @@ import axios from 'axios';
 import Navbar from './components/navbar';
 import Home from './pages/admin/home';
 import PrivateRoute from './middleware/privateRoute';
+import ProfRoute from './middleware/profRoute';
+import ProfRoutee from './middleware/profRoutee';
 import PrivateRoutee from './middleware/privateRoutee';
 import UserList from './pages/admin/userList';
 import AddUser from './pages/admin/addUser';
@@ -26,6 +28,10 @@ import EditElement from './pages/admin/editElement';
 import AddStudent from './pages/admin/addStudent';
 import StudentList from './pages/admin/studentList';
 import EditStudent from './pages/admin/editStudent';
+import LoginProf from './Logins/loginProf';
+import Dashboard from './pages/prof/dashboard';
+import Session from './pages/prof/session';
+import GAB from './pages/prof/gab';
 
 class App extends React.Component {
   constructor(props){
@@ -45,7 +51,7 @@ class App extends React.Component {
 
 <Router>
 <Switch>
-  <PrivateRoute exact path="/" component={Home} />
+  <PrivateRoute exact path="/dashboard" component={Home} />
   <PrivateRoute exact path="/users" component={UserList} />
   <PrivateRoute exact path="/profs" component={ProfList} />
   <PrivateRoute exact path="/students" component={StudentList} />
@@ -59,8 +65,12 @@ class App extends React.Component {
   <PrivateRoute exact path="/profs/add" component={AddProf} />
   <PrivateRoute exact path="/students/add" component={AddStudent} />
   <PrivateRoute exact path="/elements/add" component={AddElement} />
-
   <PrivateRoutee exact path="/login" component={LoginAdmin} />
+  <ProfRoute exact path="/" component={Dashboard}/>
+  <ProfRoute exact path="/session/:id" component={Session}/>
+  <ProfRoute exact path="/sessions/:id" component={GAB}/>
+
+  <ProfRoutee  exact path="/signin" component={LoginProf} />
 
 </Switch>
 </Router>

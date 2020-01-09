@@ -103,6 +103,8 @@ class StudentList extends React.Component {
             <td>{item.cin}</td>
             <td>{item.cne}</td>
             <td>{cla.filiere} {cla.annee}</td>
+            <td>{item.hours}</td>
+
             <td>{item.createdAt}</td>
             <td><Link className="btn btn-warning" to={"/student/"+item._id} >Edit</Link></td>
             <td><button onClick={() => this.clicked(item._id)} className="btn btn-danger">Delete</button></td>
@@ -130,6 +132,8 @@ class StudentList extends React.Component {
       <th scope="col">cin</th>
       <th scope="col">cne</th>
       <th scope="col">class</th>
+      <th scope="col">hours</th>
+
       <th scope="col">created_at</th>
       <th colSpan="2">actions</th>
 
