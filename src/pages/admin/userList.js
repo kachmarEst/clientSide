@@ -88,6 +88,10 @@ class UserList extends React.Component {
     <tr >
       <td>{item.username}</td>
      <td>{item.email}</td>
+     <td>{item.cin}</td>
+     <td>{item.firstName}</td>
+     <td>{item.lastName}</td>
+     <td>{item.role}</td>
      <td>{item.createdAt}</td>
      <td><Link className="btn btn-warning" to={"/user/"+item._id} >Edit</Link></td>
      <td><button onClick={() => this.clicked(item._id)} className="btn btn-danger">Delete</button></td>
@@ -109,6 +113,11 @@ class UserList extends React.Component {
 
       <th scope="col">username</th>
       <th scope="col">email</th>
+      <th scope="col">cin</th>
+      <th scope="col">firstName</th>
+      <th scope="col">lastName</th>
+      <th scope="col">role</th>
+
       <th scope="col">created_at</th>
       <th colSpan="2">actions</th>
 

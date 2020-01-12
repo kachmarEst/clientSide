@@ -10,6 +10,10 @@ class AddUser extends React.Component {
             username:'',
             email:'',
             password:'',
+            lastName:'',
+            firstName:'',
+            role:'',
+            cin:'',
             err:''
         }
     }
@@ -52,7 +56,11 @@ class AddUser extends React.Component {
         const cred = {
             username:this.state.username,
             email:this.state.email,
-            password:this.state.password
+            firstName:this.state.firstName,
+            lastName:this.state.lastName,
+            cin:this.state.cin,
+            password:this.state.password,
+            role:this.state.role
         }
         axios.post('//localhost:5000/users/add',cred,{
             headers:headers
@@ -71,7 +79,11 @@ class AddUser extends React.Component {
 
 
     }
-
+    onChangeRole = (e) =>{
+        this.setState({
+            role: e.target.value
+        })
+    }
     onChangeEmail = (e) =>{
         this.setState({
             email: e.target.value
@@ -87,7 +99,21 @@ class AddUser extends React.Component {
             username: e.target.value
         })
     }
-
+    onChangeFN = (e) =>{
+        this.setState({
+            firstName: e.target.value
+        })
+    }
+    onChangeLN = (e) =>{
+        this.setState({
+            lastName: e.target.value
+        })
+    }
+    onChangeCIN = (e) =>{
+        this.setState({
+            cin: e.target.value
+        })
+    }
 
   render() {
     return (
@@ -103,6 +129,19 @@ class AddUser extends React.Component {
                     
                     <h1>Add User</h1>
                     <span style={{color: 'red'}}>{this.state.err != '' ?JSON.stringify(this.state.err) : ''}</span> 
+
+                    <div className="from-group">
+                <label>FirstName</label>
+                    <input type="text" className="form-control" onChange={this.onChangeFN} name="firstName" id="firstName" placeholder="firstName" />
+                    </div>
+                    <div className="from-group">
+                <label>LastName</label>
+                    <input type="text" className="form-control" onChange={this.onChangeLN} name="lastName" id="lastName" placeholder="lastName" />
+                    </div>
+                    <div className="from-group">
+                <label>CIN</label>
+                    <input type="text" className="form-control" onChange={this.onChangeCIN} name="cin" id="cin" placeholder="cin" />
+                    </div>
                     <div className="from-group">
                 <label>Email</label>
                     <input type="email" className="form-control" onChange={this.onChangeEmail} name="email" id="email" placeholder="email" />
@@ -114,6 +153,16 @@ class AddUser extends React.Component {
                     <div className="from-group">
                     <label>Password</label>
                     <input type="password" className="form-control" onChange={this.onChangePass} name="password" id="pass" placeholder="password" />
+                    </div>
+
+                    <div className="from-group">
+                    <label>Role</label>
+                    <select className="form-control" onChange={this.onChangeRole} placeholder="password" >
+                    <option >Pick a role</option>
+                        <option value="admin">Admin</option>                       
+                        <option value="professor">Professor</option>
+
+                    </select>
                     </div>
                     <button className="btn btn-primary"  >Add</button>
     

@@ -24,7 +24,7 @@ class AddElement extends React.Component {
             'x-auth-token':localStorage.getItem('_Gtx')
              } 
 
-            axios.get('//localhost:5000/profs',{headers:headers})
+            axios.get('//localhost:5000/users/role/profs',{headers:headers})
             .then(res =>{
                 this.setState({profs:res.data});
                 console.log(res.data)

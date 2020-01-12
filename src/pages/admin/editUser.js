@@ -7,9 +7,9 @@ class EditUser extends React.Component {
     constructor(props){
         super(props);
         this.state ={
-            username:'',
-            email:'',
             password:'',
+            firstName:'',
+            lastName:'',
             err:''
         }
     }
@@ -25,10 +25,9 @@ class EditUser extends React.Component {
             axios.get('//localhost:5000/users/'+this.props.match.params.id,{headers:headers})
             .then(res =>{
                 this.setState({
-                    username:res.data.username,
-                    email:res.data.email
-                });
-                console.log(res.data.username)
+                    firstName:res.data.firstName,
+                    lastName:res.data.lastName
+                                });
             })
             .catch(error =>{
                 this.setState({err:error.response.data.msg})
@@ -73,8 +72,8 @@ class EditUser extends React.Component {
             'x-auth-token':localStorage.getItem('_Gtx')
              } 
         const cred = {
-            username:this.state.username,
-            email:this.state.email,
+            firstName:this.state.firstName,
+            lastName:this.state.lastName,
             password:this.state.password
         }
         axios.post('//localhost:5000/users/update/'+this.props.match.params.id,cred,{
@@ -96,9 +95,9 @@ class EditUser extends React.Component {
 
     }
 
-    onChangeEmail = (e) =>{
+    onChangeFN = (e) =>{
         this.setState({
-            email: e.target.value
+            firstName: e.target.value
         })
     }
     onChangePass = (e) =>{
@@ -106,9 +105,9 @@ class EditUser extends React.Component {
             password: e.target.value
         })
     }
-    onChangeUser = (e) =>{
+    onChangeLN = (e) =>{
         this.setState({
-            username: e.target.value
+            lastName: e.target.value
         })
     }
 
@@ -128,12 +127,12 @@ class EditUser extends React.Component {
                     <h1>Edit User</h1>
                     <span style={{color: 'red'}}>{this.state.err != '' ?JSON.stringify(this.state.err) : ''}</span> 
                     <div className="from-group">
-                <label>Email</label>
-                    <input type="email" className="form-control" onChange={this.onChangeEmail} value={this.state.email} name="email" id="email" placeholder="email" />
+                <label>firstName</label>
+                    <input type="text" className="form-control" onChange={this.onChangeFN} value={this.state.firstName} name="firstname" id="firstname" placeholder="firstname" />
                     </div>
                     <div className="from-group">
-                <label>Username</label>
-                    <input type="text" className="form-control" onChange={this.onChangeUser} value={this.state.username} name="username" id="user" placeholder="username" />
+                <label>lastName</label>
+                    <input type="text" className="form-control" onChange={this.onChangeLN} value={this.state.lastName} name="lastname" id="user" placeholder="lastname" />
                     </div>
                     <div className="from-group">
                     <label>Password</label>

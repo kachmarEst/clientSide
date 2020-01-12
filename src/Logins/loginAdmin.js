@@ -32,11 +32,18 @@ class LoginAdmin extends React.Component {
     username:this.state.username,
     password:this.state.password
      }
-      axios.post('//localhost:5000/auth/admin',cred,{
+      axios.post('//localhost:5000/auth/authentication',cred,{
         headers:headers})
       .then( res => {
-        localStorage.setItem('_Gtx',res.data.token);
-        this.props.history.push('/dashboard');
+          if(res.data.user.role =='admin'){
+            localStorage.setItem('_Gtx',res.data.token);
+            this.props.history.push('/dashboard');
+          }else if(res.data.user.role == 'professor'){
+            localStorage.setItem('_LsnPx',res.data.token);
+            this.props.history.push('/');
+          }
+          console.log(res)
+    
       })
       .catch( err => {
         this.setState({
@@ -53,7 +60,7 @@ class LoginAdmin extends React.Component {
           
                 <form style={{margin: '8%'}} onSubmit={this.SignIn} >
                     
-                    <h1>ADMIN LOGIN</h1>
+                    <h1>LOGIN</h1>
                     <span style={{color: 'red'}}>{this.state.err != '' ?this.state.err : ''}</span> 
                     <div className="from-group">
                 <label>Username</label>

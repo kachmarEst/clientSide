@@ -18,7 +18,8 @@ class Dashboard extends React.Component {
         elements:[],
         err:'',
         classes:[],
-        sessions:[]
+        sessions:[],
+        sum:[]
     }
 }
 
@@ -39,6 +40,7 @@ class Dashboard extends React.Component {
         })
         this.loadElements(this.state.prof_id);
         this.loadSessions(this.state.prof_id);
+        this.loadAbsc(this.state.prof_id);
 
     })
       .catch(
@@ -74,7 +76,18 @@ console.log(id)
     });
 
  }
-
+loadAbsc=(id)=>{
+  axios.get('//localhost:5000/absences/counts/stats/'+id)
+  .then(res =>{
+    this.setState({
+      sum:res.data
+    })
+    console.log(res.data)
+  })
+  .catch(err =>{
+    console.log(err);
+  })
+}
  loadElements = (id) =>{
   
   const headers = {
@@ -83,7 +96,7 @@ console.log(id)
     'x-auth-token':localStorage.getItem('_LsnPx')
      } 
 console.log(id)
-    axios.get('//localhost:5000/profs/dashboard/'+id  ,{headers:headers})
+    axios.get('//localhost:5000/users/dashboard/profs/'+id  ,{headers:headers})
     .then(res =>{
         this.setState({
             classes:res.data.classes,
@@ -123,19 +136,16 @@ if(this.state.sessions){
   return this.state.sessions.map((session)=>{
     let theE=this.state.elements.find(element => element._id == session.element_id);
     let theC=this.state.classes.find(clas =>clas._id == theE.class_id);
+    let date =new Date(session.createdAt).toDateString();
     if(theE && theC){
       return(
-        <div className="card text-white bg-secondary mb-3" >
-         <div className="card-header">Class : {theC.filiere} {theC.annee}, Time : {session.hdeb}-{session.hfin}</div>
-         <div className="card-body">
-     
-           <h5 className="card-title">  {theE.element}</h5>
-     
-           <p className="card-text"><Link className="btn btn-warning" to={"/sessions/"+session._id}>Gestion Absence</Link></p>
-           <p className="card-text">{session.createdAt}</p>
-  
-         </div>
-       </div>
+        <tr>
+          <td>{theE.element}</td>
+          <td>{theC.filiere} {theC.annee}</td>
+          <td>{session.hdeb}-{session.hfin}</td>
+          <td>{date}</td>
+          <td><Link className="btn btn-warning" to={"/sessions/"+session._id}>Gestion Absence</Link></td>
+       </tr>
         )
     }else{
       return '';
@@ -149,6 +159,22 @@ else{
 }
  }
 
+ MappingElementsT=()=>{
+  return this.state.sum.map((item)=>{
+    let element = this.state.elements.find((data)=> data._id == item._id);
+    let theC = this.state.classes.find((clas)=> clas._id == element.class_id);
+    return(   <div className="card text-white bg-secondary mb-3" >
+    <div className="card-header">Class : {theC?theC.filiere:''} {theC?theC.annee:''}</div>
+    <div className="card-body">
+
+      <h5 className="card-title"> {element?element.element:''}</h5>
+
+      <p className="card-text">{item.hours} hours</p>
+    </div>
+  </div>);
+  })
+
+ }
 
   render() {
     return (
@@ -165,8 +191,26 @@ else{
 
 
       <div className="row">
+      <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Element</th>
+      <th scope="col">filiere</th>
+      <th scope="col">Time</th>
+      <th scope="col">date</th>
+      <th scope="col">action</th>
 
+    </tr>
+  </thead>
+<tbody>
 {this.MappingSessions()}
+</tbody>
+      </table>
+</div>
+<h1>Statistics On your Elements</h1>
+
+<div className="row">
+{this.MappingElementsT()}
 </div>
         </div>
     );

@@ -25,7 +25,7 @@ class EditProf extends React.Component {
             'x-auth-token':localStorage.getItem('_Gtx')
              } 
 
-            axios.get('//localhost:5000/profs/'+this.props.match.params.id,{headers:headers})
+            axios.get('//localhost:5000/users/'+this.props.match.params.id,{headers:headers})
             .then(res =>{
                 this.setState({
                     username:res.data.username,

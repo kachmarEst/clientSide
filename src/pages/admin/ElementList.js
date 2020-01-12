@@ -103,8 +103,8 @@ class ElementList extends React.Component {
 return(   <tr >
         
     <td>{item.element }</td>
-   <td>{  pro.firstName }&nbsp;{  pro.lastName }  </td> 
-    <td>{cla.filiere} {cla.annee}</td>
+   <td>{ pro? pro.firstName:'' }&nbsp;{ pro? pro.lastName:'' }  </td> 
+    <td>{cla ?cla.filiere:''} {cla?cla.annee:''}</td>
    <td>{item.createdAt}</td>
    <td><Link className="btn btn-warning" to={"/element/"+item._id} >Edit</Link></td>
    <td><button onClick={() => this.clicked(item._id)} className="btn btn-danger">Delete</button></td>

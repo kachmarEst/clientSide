@@ -14,7 +14,7 @@ const ProfRoute = ({component: Component, ...rest}) => {
         <Route {...rest} render={props => (
             lsnpx ?
                 <Component {...props} />
-            : <Redirect to="/signin" />
+            : <Redirect to="/login" />
         )} />
     );
 };

@@ -53,16 +53,16 @@ class App extends React.Component {
 <Switch>
   <PrivateRoute exact path="/dashboard" component={Home} />
   <PrivateRoute exact path="/users" component={UserList} />
-  <PrivateRoute exact path="/profs" component={ProfList} />
+  {/* <PrivateRoute exact path="/profs" component={ProfList} /> */}
   <PrivateRoute exact path="/students" component={StudentList} />
   <PrivateRoute exact path="/elements" component={ElementList} />
   <PrivateRoute exact path="/user/:id" component={EditUser} />
-  <PrivateRoute exact path="/prof/:id" component={EditProf} />
+  {/* <PrivateRoute exact path="/prof/:id" component={EditProf} /> */}
   <PrivateRoute exact path="/element/:id" component={EditElement} />
   <PrivateRoute exact path="/class/:id" component={EditClass} />
   <PrivateRoute exact path="/student/:id" component={EditStudent} />
   <PrivateRoute exact path="/users/add" component={AddUser} />
-  <PrivateRoute exact path="/profs/add" component={AddProf} />
+  {/* <PrivateRoute exact path="/profs/add" component={AddProf} /> */}
   <PrivateRoute exact path="/students/add" component={AddStudent} />
   <PrivateRoute exact path="/elements/add" component={AddElement} />
   <PrivateRoutee exact path="/login" component={LoginAdmin} />
@@ -70,7 +70,7 @@ class App extends React.Component {
   <ProfRoute exact path="/session/:id" component={Session}/>
   <ProfRoute exact path="/sessions/:id" component={GAB}/>
 
-  <ProfRoutee  exact path="/signin" component={LoginProf} />
+  {/* <ProfRoutee  exact path="/signin" component={LoginProf} /> */}
 
 </Switch>
 </Router>
